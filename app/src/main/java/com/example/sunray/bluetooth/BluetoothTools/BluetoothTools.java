@@ -1,4 +1,4 @@
-package com.example.sunray.bluetooth.SSP;
+package com.example.sunray.bluetooth.BluetoothTools;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
@@ -73,7 +73,7 @@ public class BluetoothTools {
 	public static final String ACTION_DATA_TO_SERVICE = "ACTION_DATA_TO_SERVICE";
 
 	/**
-	 * Action：到游戏业务中的数据
+	 * Action：到业务中的数据
 	 */
 	public static final String ACTION_DATA_TO_GAME = "ACTION_DATA_TO_GAME";
 
@@ -83,16 +83,53 @@ public class BluetoothTools {
 	public static final String ACTION_CONNECT_SUCCESS = "ACTION_CONNECT_SUCCESS";
 
 
+	/**
+	 * Action：接收数据
+	 */
 	public static final String ACTION_RECEIVE_DATA = "ACTION_RECEIVE_DATA";
 
-
+	/**
+	 * Action：准备好连接
+	 */
 	public static final String ACTION_PAIRING_SUCC = "ACTION_PAIRING_SUCC";
+
 	/**
 	 * Action：连接错误
 	 */
 	public static final String ACTION_CONNECT_ERROR = "ACTION_CONNECT_ERROR";
+
+	/**
+	 * Action：连接成功
+	 */
 	public static final String ACTION_CONNECT_SUC = "ACTION_CONNECT_SUC";
 
+	/**
+	 * Action：BLE连接成功
+	 */
+	public static final String ACTION_CONNECTLE_SUCCESS = "ACTION_CONNECTLE_SUCCESS";
+
+
+	/**
+	 * Action：BLE准备好连接
+	 */
+	public static final String ACTION_PAIRINGLE_SUCC = "ACTION_PAIRINGLE_SUCC";
+
+	/**
+	 * Action：BLE到业务中的数据
+	 */
+	public static final String ACTION_DATALE_TO_GAME = "ACTION_DATALE_TO_GAME";
+
+	
+	
+	public static final String ACTION_LESTART_SEARCH = "ACTION_START_SEARCH";
+	
+	public static final String ACTION_LEDATA_SEND = "ACTION_LEDATA_SEND";
+
+    public static final String ACTION_OPEN_BLE = "ACTION_OPEN_BLE";
+
+	public static final String ACTION_DEVICE_SEND = "ACTION_DEVICE_SEND";
+
+	public static final String ACTION_RECEIVELE_DATA = "ACTION_RECEIVELE_DATA";
 	/**
 	 * Message类型标识符，连接成功
 	 */

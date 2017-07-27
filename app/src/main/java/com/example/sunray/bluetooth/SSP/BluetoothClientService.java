@@ -1,7 +1,6 @@
 package com.example.sunray.bluetooth.SSP;
 
 import android.app.Service;
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
@@ -13,6 +12,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+
+import com.example.sunray.bluetooth.BluetoothTools.BluetoothTools;
 
 import java.io.UnsupportedEncodingException;
 
@@ -33,7 +34,7 @@ public class BluetoothClientService extends Service {
             //如果匹配成功
             if (BluetoothTools.ACTION_PAIRING_SUCC.equals(actionCon)){
                 Bundle mBundle = intent.getExtras();
-                BluetoothDevice mBluetoothDevice = (BluetoothDevice)mBundle.getParcelable("Pairing_Succ");
+                BluetoothDevice mBluetoothDevice = mBundle.getParcelable("Pairing_Succ");
                 BluetoothClientConnThread mThread = new BluetoothClientConnThread(handler,mBluetoothDevice);
                 mThread.start();
             }
@@ -49,6 +50,7 @@ public class BluetoothClientService extends Service {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+
             }
         }
     };

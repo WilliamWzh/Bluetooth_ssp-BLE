@@ -6,7 +6,8 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.example.sunray.bluetooth.BluetoothTools.BluetoothTools;
 
 import java.io.IOException;
 

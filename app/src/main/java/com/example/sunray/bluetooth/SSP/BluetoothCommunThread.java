@@ -2,13 +2,11 @@ package com.example.sunray.bluetooth.SSP;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
-import android.os.Message;
 
-import java.io.BufferedInputStream;
+import com.example.sunray.bluetooth.BluetoothTools.BluetoothTools;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 /**

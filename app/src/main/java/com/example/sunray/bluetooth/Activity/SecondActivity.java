@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 //import com.example.sunray.bluetooth.SSP.BluetoothClientService;
 import com.example.sunray.bluetooth.SSP.BluetoothClientService;
-import com.example.sunray.bluetooth.SSP.BluetoothTools;
+import com.example.sunray.bluetooth.BluetoothTools.BluetoothTools;
 import com.example.sunray.bluetooth.SSP.ClsUtils;
 import com.example.sunray.bluetooth.SSP.Device;
 import com.example.sunray.bluetooth.SSP.DeviceAdapter;
@@ -98,7 +98,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             //如果收到数据
             if(BluetoothTools.ACTION_RECEIVE_DATA.equals(action)){
                 String recData = (String)intent.getExtras().get("recData");
-                Toast.makeText(context,recData,Toast.LENGTH_LONG).show();
+//                Toast.makeText(context,recData,Toast.LENGTH_LONG).show();
                 contentView.setText(recData);
             }
 
@@ -184,6 +184,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     Intent actIntent = new Intent(BluetoothTools.ACTION_DATA_TO_GAME);
                     actIntent.putExtra("editViewData",editView.getText().toString());
                     sendBroadcast(actIntent);
+                    editView.getText().clear();
                 }
             }
         }
@@ -203,7 +204,10 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        Intent startServ = new Intent(SecondActivity.this, BluetoothClientService.class);
+        stopService(startServ);
         unregisterReceiver(mBluetoothReceiver);
+        super.onDestroy();
+
     }
 }

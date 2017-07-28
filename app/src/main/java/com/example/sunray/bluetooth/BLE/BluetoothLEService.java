@@ -85,7 +85,7 @@ public class BluetoothLEService extends Service {
     @Override
     public void onDestroy() {
 
-//        mGatt.close();
+        mGatt.close();
         unregisterReceiver(controlReceiver);
         super.onDestroy();
         stopSelf();
@@ -348,21 +348,13 @@ public class BluetoothLEService extends Service {
             public void run() {
                 while(true) {
                     if (isSend == true) {
-                        writeCharacteristic(characteristicWrite,bytes);
+                        characteristicWrite.setValue(bytes);
+                        mGatt.writeCharacteristic(characteristicWrite);
                         Log.e(TAG, "------->write");
                         isSend = false;
                     }
                 }
             }
         }).start();
-    }
-
-    public void writeCharacteristic(BluetoothGattCharacteristic characteristic, byte[] data) {
-        if (mBluetoothAdapter == null || mGatt == null) {
-            Log.e(TAG, "BluetoothAdapter not initialized");
-            return;
-        }
-        characteristic.setValue(data);
-        mGatt.writeCharacteristic(characteristic);
     }
 }

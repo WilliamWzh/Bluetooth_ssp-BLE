@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private String TAG = "TAG";
     public String action;
     public int REQUEST_ENABLE = 1;
+    public StringBuffer stringBuffer = new StringBuffer();
 
     private List<BluetoothDevice> deviceList = new ArrayList<BluetoothDevice>();
     private List<Device> deviList = new ArrayList<Device>();
@@ -97,9 +99,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
             //如果收到数据
             if(BluetoothTools.ACTION_RECEIVE_DATA.equals(action)){
-                String recData = (String)intent.getExtras().get("recData");
+                String recData = ((String)intent.getExtras().get("recData")).trim();
+
+                stringBuffer.append(recData+"\n");
 //                Toast.makeText(context,recData,Toast.LENGTH_LONG).show();
-                contentView.setText(recData);
+                contentView.setText(stringBuffer);
             }
 
 
@@ -135,6 +139,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         send_bt.setOnClickListener(this);
         search_bt.setOnClickListener(this);
         showView.setAdapter(adapter);
+        contentView.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
 

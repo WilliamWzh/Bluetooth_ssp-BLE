@@ -27,8 +27,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.SecondActivity" />
-        <activity android:name=".Activity.ThirdActivity" />
+        <activity android:name=".Activity.SecondActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activity.ThirdActivity"
+            android:windowSoftInputMode="stateHidden"
+            />
+
 
         <service android:name=".SSP.BluetoothClientService" />
         <service android:name=".BLE.BluetoothLEService" />

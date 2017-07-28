@@ -51,12 +51,13 @@ public class BluetoothCommunThread extends Thread {
     @Override
     public void run() {
 
-        byte[] buffer = new byte[1024];  // buffer store for the stream
-        int bytes; // bytes returned from read()
+         // bytes returned from read()
 
 
         while (true) {
             try {
+                byte[] buffer = new byte[1024];  // buffer store for the stream
+                int bytes;
                 bytes = mmInStream.read(buffer);
                 serviceHandler.obtainMessage(BluetoothTools.MESSAGE_READ_OBJECT, bytes, -1, buffer)
                         .sendToTarget();

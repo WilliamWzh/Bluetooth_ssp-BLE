@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +36,7 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
     public String TAG = "ThirdActivity.class";
     public int REQUEST_ENABLE = 1;
     public boolean switchSearchBt = true;
+    public StringBuffer receDataBf = new StringBuffer();;
 
     public BluetoothAdapter mBluetoothAdapter;
     public BluetoothLeScanner mBluetoothLeScanner;
@@ -46,6 +48,7 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
     public ListView showView;
     public Button search_bt;
     public Button send_bt;
+
 
     private LEDeviceAdapter adapter;
     private List<BluetoothDevice> deviceList = new ArrayList<BluetoothDevice>();
@@ -67,8 +70,10 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
 
             if(BluetoothTools.ACTION_RECEIVELE_DATA.equals(action)){
                 String receData = (String)intent.getExtras().get("receiveData");
+
+                receDataBf.append(receData + "\n");
 //                Log.e(TAG,"11111"+receData);
-                contentView.setText(receData);
+                contentView.setText(receDataBf);
             }
         }
     };
@@ -80,6 +85,8 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_second);
 
         initLayout();
+        contentView.setMovementMethod(ScrollingMovementMethod.getInstance());
+//        contentView.requestFocus();
         showView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.example.sunray.bluetooth.BluetoothTools.BluetoothTools;
 
@@ -23,7 +24,7 @@ import java.io.UnsupportedEncodingException;
  */
 
 public class BluetoothClientService extends Service {
-
+    public String TAG = "SecondActivity";
     public String actionCon;
     public BluetoothCommunThread communThread;
     private BroadcastReceiver controlReceiver = new BroadcastReceiver() {
@@ -101,8 +102,16 @@ public class BluetoothClientService extends Service {
                 } case BluetoothTools.MESSAGE_READ_OBJECT: {
                     //读取到对象
                     //发送数据广播（包含数据对象）
-                    byte[] readBuf = (byte[]) msg.obj;
-                    String ss = new String(readBuf, 0,msg.arg1);
+                    byte[] readBuf = null;
+                    readBuf =(byte[]) msg.obj;
+                    String ss1 = new String(readBuf, 0,msg.arg1);
+                    String ss = null;
+                    try {
+                        ss = new String(readBuf,"gbk");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    Log.e(TAG,ss1+","+ss);
                     Intent recIntent = new Intent(BluetoothTools.ACTION_RECEIVE_DATA);
                     recIntent.putExtra("recData",ss);
                     sendBroadcast(recIntent);
@@ -116,8 +125,9 @@ public class BluetoothClientService extends Service {
 
     @Override
     public void onDestroy() {
+
+        super.onDestroy();
         communThread.cancel();
         unregisterReceiver(controlReceiver);
-        super.onDestroy();
     }
 }
